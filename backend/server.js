@@ -10,7 +10,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://food-scroll-part-2.vercel.app'],
+    credentials: true
+}));
 app.use(express.json());
 
 // Routes
@@ -36,7 +39,7 @@ app.get('/', (req, res) => {
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
-    app.get('*', (req, res) => {
+    app.get(/(.*)/, (req, res) => {
         res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
     });
 }
