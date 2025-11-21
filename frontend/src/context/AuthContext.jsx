@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import API from '../services/api';
 
 const AuthContext = createContext();
 
@@ -14,19 +14,17 @@ export const AuthProvider = ({ children }) => {
         const storedUser = localStorage.getItem('user');
         if (token && storedUser) {
             setUser(JSON.parse(storedUser));
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         }
         setLoading(false);
     }, []);
 
     const login = async (email, password, role) => {
         try {
-            const res = await axios.post('/api/auth/login', { email, password, role });
+            const res = await API.post('/auth/login', { email, password, role });
             const { token, user } = res.data;
 
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             setUser(user);
             return { success: true };
         } catch (error) {
@@ -36,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
     const registerUser = async (userData) => {
         try {
-            await axios.post('/api/auth/register-user', userData);
+            await API.post('/auth/register-user', userData);
             return { success: true };
         } catch (error) {
             return { success: false, message: error.response?.data?.message || 'Registration failed' };
@@ -45,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
     const registerPartner = async (partnerData) => {
         try {
-            await axios.post('/api/auth/register-partner', partnerData);
+            await API.post('/auth/register-partner', partnerData);
             return { success: true };
         } catch (error) {
             return { success: false, message: error.response?.data?.message || 'Registration failed' };
@@ -55,7 +53,6 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        delete axios.defaults.headers.common['Authorization'];
         setUser(null);
     };
 
