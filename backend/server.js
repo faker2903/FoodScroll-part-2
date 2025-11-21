@@ -10,21 +10,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
+import cors from "cors";
 
-        // Allow localhost and any Vercel deployment
-        if (origin.includes('localhost') || origin.includes('.vercel.app')) {
-            return callback(null, true);
-        }
+app.use(
+  cors({
+    origin: "https://food-scroll-part-2.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
-        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-    },
-    credentials: true
-}));
 app.use(express.json());
 
 // Request Logging Middleware
