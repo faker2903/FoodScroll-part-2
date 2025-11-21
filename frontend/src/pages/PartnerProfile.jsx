@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../services/api';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FaUtensils } from 'react-icons/fa';
@@ -13,7 +13,7 @@ const PartnerProfile = () => {
     const [loading, setLoading] = useState(true);
 
     // If no ID is provided, and user is a partner, show their own profile
-    const profileId = id || (user?.role === 'partner' ? user.id : null);
+    const profileId = id || (user?.role === 'partner' ? user._id : null);
 
     useEffect(() => {
         if (profileId) {
@@ -25,7 +25,7 @@ const PartnerProfile = () => {
         try {
             // If viewing own profile as partner, we might need a different endpoint or just use the public one
             // The public endpoint returns partner info and videos
-            const res = await axios.get(`/api/videos/by-partner/${profileId}`);
+            const res = await API.get(`/videos/by-partner/${profileId}`);
             setPartner(res.data.partner);
             setVideos(res.data.videos);
             setLoading(false);
