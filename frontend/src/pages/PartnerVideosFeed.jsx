@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import API from '../services/api';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import VideoFeedItem from '../components/VideoFeedItem';
 import CommentModal from '../components/CommentModal';
@@ -35,7 +35,7 @@ const PartnerVideosFeed = () => {
 
     const fetchPartnerVideos = async () => {
         try {
-            const res = await axios.get(`/api/videos/by-partner/${id}`);
+            const res = await API.get(`/videos/by-partner/${id}`);
             // API returns { partner, videos }
             setVideos(res.data.videos);
             setLoading(false);
