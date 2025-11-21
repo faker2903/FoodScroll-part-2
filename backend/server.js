@@ -18,10 +18,10 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/videos', require('./routes/videos'));
 app.use('/api/partner', require('./routes/partner'));
 
+const connectDB = require('./config/db');
+
 // Database Connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/foodtok')
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.error('MongoDB Connection Error:', err));
+connectDB();
 
 // Routes Placeholder
 app.get('/api/health', (req, res) => {
