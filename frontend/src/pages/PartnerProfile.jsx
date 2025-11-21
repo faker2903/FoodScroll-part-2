@@ -13,7 +13,7 @@ const PartnerProfile = () => {
     const [loading, setLoading] = useState(true);
 
     // If no ID is provided, and user is a partner, show their own profile
-    const profileId = id || (user?.role === 'partner' ? user._id : null);
+    const profileId = id || (user?.role === 'partner' ? user.id : null);
 
     useEffect(() => {
         if (profileId) {
