@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const UserProfile = () => {
 
     const fetchSavedVideos = async () => {
         try {
-            const res = await axios.get('/api/videos/saved');
+            const res = await API.get('/videos/saved');
             setSavedVideos(res.data);
             setLoading(false);
         } catch (error) {

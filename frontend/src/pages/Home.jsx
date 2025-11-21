@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
-import axios from 'axios';
+import API from '../services/api';
 import CommentModal from '../components/CommentModal';
 import SkeletonVideoFeed from '../components/SkeletonVideoFeed';
 
@@ -23,7 +23,7 @@ const Home = () => {
 
     const fetchVideos = async () => {
         try {
-            const res = await axios.get(`/api/videos/all?page=${page}&limit=5`);
+            const res = await API.get(`/videos/all?page=${page}&limit=5`);
             if (res.data.length === 0) {
                 setHasMore(false);
             } else {

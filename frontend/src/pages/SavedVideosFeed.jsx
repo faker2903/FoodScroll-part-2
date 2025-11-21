@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import API from '../services/api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import VideoFeedItem from '../components/VideoFeedItem';
 import CommentModal from '../components/CommentModal';
@@ -23,7 +23,7 @@ const SavedVideosFeed = () => {
 
     const fetchSavedVideos = async () => {
         try {
-            const res = await axios.get('/api/videos/saved');
+            const res = await API.get('/videos/saved');
             setVideos(res.data);
             setLoading(false);
 

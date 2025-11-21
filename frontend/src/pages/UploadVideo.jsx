@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { FaCloudUploadAlt, FaVideo } from 'react-icons/fa';
 
@@ -29,7 +29,7 @@ const UploadVideo = () => {
         formData.append('video', videoFile);
 
         try {
-            await axios.post('/api/videos/upload', formData, {
+            await API.post('/videos/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
