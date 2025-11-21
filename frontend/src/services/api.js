@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://foodscroll-part-2.onrender.com/api',
+    baseURL: 'https://foodscroll-part-2.onrender.com',
 });
 
 // Add token to requests
