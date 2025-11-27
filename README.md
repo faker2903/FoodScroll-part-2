@@ -7,7 +7,7 @@ FoodScroll is a vertical video scrolling application focused on food content, si
 FoodScroll serves as a bridge between food lovers and culinary creators.
 - **For Users**: It's a discovery platform where they can endlessly scroll through mouth-watering food videos, save their favorites for later, and interact with the community.
 - **For Partners**: It's a marketing tool allowing restaurants, cafes, and home chefs to reach a wider audience by uploading dynamic video content instead of static images.
-
+- **Live Demo**: https://food-scroll-part-2.vercel.app/register (Backend will take some time to load)
 ## ✨ Key Features
 
 ### 👤 User Features
